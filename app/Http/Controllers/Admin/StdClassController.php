@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\StdClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StdClassController extends Controller
 {
@@ -12,7 +14,20 @@ class StdClassController extends Controller
      */
     public function index()
     {
-        //
+        $classes = StdClass::with('major')->get();
+
+        $headers = ['Nama', 'Jurusan'];
+        $data = [];
+
+        foreach ($classes as $class) {
+            $data[] = [
+                $class->id,
+                $class->name,
+                $class->major->name,
+            ];
+        }
+
+        return view('pages.admin.class.index', compact('headers', 'data'));
     }
 
     /**

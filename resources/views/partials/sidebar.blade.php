@@ -80,6 +80,14 @@
             </a>
         </li>
 
+        <!-- Class -->
+        <li class="menu-item {{ is_route('class.index', 'active') }}">
+            <a href="{{ route('class.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-class"></i>
+                <div data-i18n="Analytics">Class</div>
+            </a>
+        </li>
+
         <!-- Layouts -->
         {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
