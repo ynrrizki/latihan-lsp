@@ -13,7 +13,7 @@
                 <span>
                     <i class="bx bx-plus me-1"></i>
                     <span class="d-none d-lg-inline-block">
-                        Tambah Siswa
+                        Tambah Siswa Baru
                     </span>
                 </span>
             </button>

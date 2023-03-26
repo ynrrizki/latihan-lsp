@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Payment extends Model
 {
     use HasFactory;
-
+    protected $dates = [
+        'pay_on',
+    ];
     protected $fillable = [
         'user_id',
         'nisn',

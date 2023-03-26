@@ -16,7 +16,7 @@
                 <span>
                     <i class="bx bx-plus me-1"></i>
                     <span class="d-none d-lg-inline-block">
-                        Tambah SPP
+                        Tambah SPP Baru
                     </span>
                 </span>
             </button>
@@ -56,7 +56,6 @@
         <script>
             $(document).ready(function() {
                 $('#myTable').DataTable();
-
                 $(document).on('click', '.btn-edit', function() {
                     let id = $(this).data('id');
                     let edit = "{{ route('spp.edit', ':id') }}";

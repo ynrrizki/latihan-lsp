@@ -31,7 +31,7 @@ class SppController extends Controller
             $data[] = [
                 $spp->id,
                 $spp->id,
-                Carbon::parse($spp->year)->format('Y'),
+                $spp->year,
                 "Rp. " . number_format($spp->amount),
             ];
         }

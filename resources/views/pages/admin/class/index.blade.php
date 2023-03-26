@@ -13,7 +13,7 @@
                 <span>
                     <i class="bx bx-plus me-1"></i>
                     <span class="d-none d-lg-inline-block">
-                        Tambah Kelas
+                        Tambah Kelas Baru
                     </span>
                 </span>
             </button>

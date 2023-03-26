@@ -12,7 +12,7 @@
                 <span>
                     <i class="bx bx-plus me-1"></i>
                     <span class="d-none d-lg-inline-block">
-                        Tambah Operator
+                        Tambah Operator Baru
                     </span>
                 </span>
             </button>

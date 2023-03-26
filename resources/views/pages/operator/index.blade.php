@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <x-offcanvas :title="'Add Class'" :id="'offcanvasAddPayment'">
+    <x-offcanvas :title="'Tambah Pembayaran'" :id="'offcanvasAddPayment'">
         <form action="{{ route('payment.store') }}" class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework"
             id="paymentForm" method="POST">
             @csrf
@@ -51,9 +51,7 @@
                 'name' => 'spp_id',
                 'type' => 'select',
                 'options' => $spps->map(function ($spp) {
-                        return "<option value='$spp->id'>" .
-                            carbon()->parse($spp->year)->format('Y') .
-                            '</option>';
+                        return "<option value='$spp->id'>" . $spp->year . '</option>';
                     })->join(''),
             ])
 

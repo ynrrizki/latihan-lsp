@@ -30,17 +30,22 @@ class AuthController extends Controller
     {
         $request->authenticate();
 
-        $page = 'login';
+        $page = route('login');
         $request->session()->regenerate();
         if (auth()->user()->role == 'ADMIN') {
-            $page = 'admin';
+            $page = route('admin');
         }
 
         if (auth()->user()->role == 'OPERATOR') {
-            $page = 'payment.index';
+            $page = route('payment.index');
         }
 
-        return redirect()->intended(route($page));
+        if (auth()->user()->role == 'STUDENT') {
+            $id = encrypt(auth()->user()->id);
+            $page = route('payment.show', ['id' => $id]);
+        }
+
+        return redirect()->intended($page);
     }
 
     public function store(Request $request)

@@ -57,5 +57,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::delete('/entry-payment/{id}', [PaymentController::class, 'destroy'])->name('payment.destroy');
     });
 
-    Route::get('/history-payment/{id}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::get('/history-payment/student', [PaymentController::class, 'show'])->name('payment.show');
 });
