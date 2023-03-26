@@ -16,15 +16,21 @@ class Payment extends Model
         'nisn',
         'spp_id',
         'pay_on',
+        'total',
     ];
 
     public function operator(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function students(): BelongsTo
+    public function student(): BelongsTo
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'nisn', 'nisn');
+    }
+
+    public function spp(): BelongsTo
+    {
+        return $this->belongsTo(Spp::class);
     }
 }

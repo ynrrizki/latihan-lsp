@@ -5,7 +5,7 @@
         @stack('addon-css')
     @endpush
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar @if (auth()->user()->role != 'ADMIN') layout-without-menu @endif">
         <div class="layout-container">
             <!-- Menu -->
 
@@ -29,7 +29,6 @@
                         @yield('content')
                     </div>
                     <!-- / Content -->
-
                     <!-- Footer -->
                     @include('partials.footer')
                     <!-- / Footer -->
@@ -51,6 +50,17 @@
 
         <!-- Page JS -->
         <script src="{{ asset('./themes/assets/js/dashboards-analytics.js') }}"></script>
+
         @stack('addon-js')
+        @if (session()->has('notif-success'))
+            <script>
+                toastr.success("{{ session('notif-success') }}");
+            </script>
+        @endif
+        @if (session()->has('notif-failed'))
+            <script>
+                toastr.error("{{ session('notif-failed') }}");
+            </script>
+        @endif
     @endpush
 @endsection

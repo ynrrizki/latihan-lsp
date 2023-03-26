@@ -37,7 +37,7 @@ class AuthController extends Controller
         }
 
         if (auth()->user()->role == 'OPERATOR') {
-            $page = 'historyPayment.index';
+            $page = 'payment.index';
         }
 
         return redirect()->intended(route($page));
@@ -62,6 +62,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/auth/login');
     }
 }

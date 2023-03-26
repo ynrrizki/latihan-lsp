@@ -26,9 +26,9 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function stdClass(): HasOne
+    public function stdClass(): BelongsTo
     {
-        return $this->hasOne(StdClass::class);
+        return $this->belongsTo(StdClass::class);
     }
 
     public function payments(): HasMany

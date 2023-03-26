@@ -43,6 +43,11 @@ class UserSeeder extends Seeder
             if ($item->role == 'STUDENT') {
                 Student::create([
                     'user_id' => $item->id,
+                    'std_class_id' => 1,
+                    'nis' => '12345',
+                    'nisn' => '12345',
+                    'address' => 'JL.Adil',
+                    'phone' => '085697833921',
                 ]);
             }
         }

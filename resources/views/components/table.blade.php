@@ -11,7 +11,6 @@
         <tbody>
             @foreach ($data as $row)
                 <tr>
-
                     @foreach ($row as $cell)
                         @if ($cell != $loop->first)
                             <td>
@@ -30,10 +29,11 @@
                                     data-id="{{ $row[0] }}"><i class="bx bx-edit-alt me-1"></i>
                                     Edit
                                 </button>
-                                <form action="{{ route($delete, $loop->first) }}" method="post">
-                                    @method('DELETE')
+                                <form action="{{ route($delete, $row[0]) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i>
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bx bx-trash me-1"></i>
                                         Delete
                                     </button>
                                 </form>

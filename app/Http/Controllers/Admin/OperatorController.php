@@ -15,7 +15,7 @@ class OperatorController extends Controller
     {
         $operators = User::where('role', 'OPERATOR')->get();
         $users = User::where('role', 'OPERATOR')->get();
-        $headers = ['name', 'email', 'username'];
+        $headers = ['nama', 'email', 'username'];
         $data = [];
 
         foreach ($users as $user) {

@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="{{ asset('./themes/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('./themes/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- <link rel="stylesheet" href="{{ asset('./themes/assets/vendor/libs/toastr/toastr.css') }}" /> --}}
     @stack('css')
 
     <!-- Page CSS -->
@@ -51,7 +53,6 @@
 
 <body>
 
-
     @yield('body')
 
     <!-- Core JS -->
@@ -65,6 +66,10 @@
     <!-- Main JS -->
     <script src="{{ asset('./themes/assets/vendor/js/menu.js') }}"></script>
     <script src="{{ asset('./themes/assets/js/main.js') }}"></script>
+    {{-- <script src="{{ asset('./themes/assets/js/ui-toasts.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/assets/js/ui-toasts.js">
+    </script>
     @stack('js')
 </body>
 

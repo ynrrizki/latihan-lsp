@@ -6,13 +6,13 @@
     @endpush
     <div class="card">
         <h5 class="card-header d-flex justify-content-between">
-            List Operator
+            Daftar Operator
             <button class="btn btn-secondary create-new btn-primary" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasAddOperator" aria-controls="offcanvasEnd">
                 <span>
                     <i class="bx bx-plus me-1"></i>
-                    <span class="d-none d-lg-inline-block">Add New
-                        Operator
+                    <span class="d-none d-lg-inline-block">
+                        Tambah Operator
                     </span>
                 </span>
             </button>
@@ -27,7 +27,7 @@
             id="operatorForm" method="POST">
             @csrf
             @field([
-                'label' => 'Full Name',
+                'label' => 'Nama Lengkap',
                 'name' => 'name',
                 'placeholder' => 'John Doe',
                 'type' => 'text',
@@ -116,12 +116,12 @@
                         dataType: 'JSON',
                         success: function(data) {
                             console.log(data);
+                            $('#operatorForm').append('@method('PUT')');
                             $('#id').val(data.id);
                             $('#name').val(data.name);
                             $('#email').val(data.email);
                             $('#username').val(data.username);
                             $('#operatorForm').attr('action', update);
-                            $('#operatorForm').append('@method('PUT')');
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
@@ -132,9 +132,9 @@
                 $('#offcanvasAddOperator').on('hidden.bs.offcanvas', function() {
                     let store = "{{ route('operator.store') }}";
                     if (!(this).hasClass('show')) {
-                        $(this).find('form')[0].reset();
+                        $('#operatorForm')[0].reset();
                         $('#operatorForm').attr('action', store);
-                        $('#operatorForm').remove('@method('PUT')')
+                        $('input[name="_method"]').remove();
                     }
                 });
             });

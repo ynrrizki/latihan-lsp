@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('nisn');
+            $table->string('nisn');
             $table->foreignId('spp_id');
             $table->date('pay_on');
+            $table->integer('total');
             $table->timestamps();
         });
     }

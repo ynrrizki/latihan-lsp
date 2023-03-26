@@ -15,6 +15,6 @@ class IsOperator
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return in_array(auth()->user()->role, ['ADMIN', 'OPERATOR']) ? $next($request) : redirect('/dashboard');
+        return in_array(auth()->user()->role, ['OPERATOR', 'ADMIN']) ? $next($request) : redirect('/dashboard');
     }
 }

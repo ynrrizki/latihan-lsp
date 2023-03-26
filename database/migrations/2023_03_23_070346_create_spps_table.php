@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spps', function (Blueprint $table) {
             $table->id();
-            $table->year('year');
+            $table->string('year');
             $table->integer('amount');
             $table->timestamps();
         });

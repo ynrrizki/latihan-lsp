@@ -3,18 +3,17 @@
 @section('content')
     @push('addon-css')
         <link rel="stylesheet" href="{{ asset('./themes/assets/vendor/libs/dataTables/dataTables.bootstrap5.min.css') }}">
-        <link rel="stylesheet"
-            href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/assets/vendor/libs/select2/select2.css">
+        <link rel="stylesheet" href="{{ asset('./themes/assets/vendor/libs/select2/select2.css') }}">
     @endpush
     <div class="card">
         <h5 class="card-header d-flex justify-content-between">
-            List Student
+            Daftar Siswa
             <button class="btn btn-secondary create-new btn-primary" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasAddStudent" aria-controls="offcanvasEnd">
                 <span>
                     <i class="bx bx-plus me-1"></i>
                     <span class="d-none d-lg-inline-block">
-                        Add New Student
+                        Tambah Siswa
                     </span>
                 </span>
             </button>
@@ -24,7 +23,7 @@
         </div>
     </div>
 
-    <x-offcanvas :title="'Add Student'" :id="'offcanvasAddStudent'">
+    <x-offcanvas :title="'Tambah Siswa'" :id="'offcanvasAddStudent'">
         <form action="{{ route('student.store') }}" class="add-new-user pt-0 fv-plugins-bootstrap5 fv-plugins-framework"
             id="studentForm" method="POST">
             @csrf
@@ -33,7 +32,7 @@
             </div>
             <input type="hidden" name="id">
             @field([
-                'label' => 'Full Name',
+                'label' => 'Nama Lengkap',
                 'name' => 'name',
                 'placeholder' => 'John Doe',
                 'type' => 'text',
@@ -72,7 +71,7 @@
                 'type' => 'text',
             ])
             @field([
-                'label' => 'Class',
+                'label' => 'Kelas',
                 'name' => 'std_class_id',
                 'type' => 'select',
                 'options' => $classes->map(function ($class) {
@@ -91,13 +90,13 @@
             {{-- </div> --}}
 
             @field([
-                'label' => 'Address',
+                'label' => 'Alamat',
                 'name' => 'address',
                 'placeholder' => 'address...',
                 'type' => 'textarea',
             ])
             @field([
-                'label' => 'Phone',
+                'label' => 'Nomer HP',
                 'name' => 'phone',
                 'placeholder' => '08568563',
                 'type' => 'text',
@@ -109,13 +108,11 @@
     @push('addon-js')
         <script src="{{ asset('themes/assets/vendor/libs/dataTables/dataTables.min.js') }}"></script>
         <script src="{{ asset('themes/assets/vendor/libs/dataTables/dataTables.bootstrap5.min.js') }}"></script>
-        <script
-            src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/assets/vendor/libs/select2/select2.js">
-        </script>
+        <script src="{{ asset('./themes/assets/vendor/libs/select2/select2.js') }}"></script>
         <script>
             $(document).ready(function() {
                 $('#myTable').DataTable();
-                $("#std_class").select2({
+                $("#std_class_id").select2({
                     dropdownParent: $('#offcanvasAddStudent')
                 });
                 $(document).on('click', '.btn-edit', function() {
@@ -130,7 +127,7 @@
                         type: 'GET',
                         dataType: 'JSON',
                         success: function(data) {
-                            console.log(data);
+                            $('#studentForm').append('@method('PUT')');
                             $('#id').val(data.id);
                             $('#name').val(data.name);
                             $('#email').val(data.email);
@@ -141,7 +138,7 @@
                             $('#address').val(data.student.address);
                             $('#phone').val(data.student.phone);
                             $('#studentForm').attr('action', update);
-                            $('#studentForm').append('@method('PUT')');
+                            $('#std_class_id').trigger('change');
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
@@ -153,8 +150,8 @@
                     if (!$(this).hasClass('show')) {
                         $(this).find('form')[0].reset();
                         $('#studentForm').attr('action', store);
-                        $('#studentForm').remove('@method('PUT')');
-
+                        $('#classForm > input[name="_method"]').remove();
+                        $('#std_class_id').trigger('change');
                     }
                 });
             });

@@ -16,10 +16,10 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $users = User::with(['student'])->where('role', 'STUDENT')->get();
+        $users = User::with(['student', 'student.stdClass', 'student.stdClass.major'])->where('role', 'STUDENT')->get();
         // $student = Student::with(['stdClass'])->get();
         $classes = StdClass::with('major')->get();
-        $headers = ['name', 'email', 'username'];
+        $headers = ['name', 'email', 'username', 'class'];
         $data = [];
 
         // dd($student);
@@ -29,6 +29,7 @@ class StudentController extends Controller
                 $user->name,
                 $user->email,
                 $user->username,
+                $user->student->stdClass->name . " " . $user->student->stdClass->major->name
             ];
         }
 

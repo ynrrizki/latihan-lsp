@@ -9,9 +9,9 @@
     <div class="row">
         <div class="card">
             <div class="card-header header-elements p-3 my-n1">
-                <h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">Transaction SPP Statistics</h5>
+                <h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">Statistik Pembayaran SPP</h5>
                 <div class="card-action-element ms-auto py-0">
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle p-0" data-bs-toggle="dropdown"
                             aria-expanded="false"><i class="bx bx-calendar"></i></button>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="card-body">
@@ -58,13 +58,47 @@
         </div>
     </div>
     @push('addon-js')
-        <script
+        {{-- <script
             src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/assets/vendor/libs/sortablejs/sortable.js">
         </script>
         <script>
             const cardEl = document.getElementById('sortable-cards');
             Sortable.create(cardEl);
-        </script>
+        </script> --}}
+        {{-- <script>
+            // ambil data payments dari controller
+            const payments = {!! json_encode($payments) !!};
+
+            // konversi data payments menjadi array bulan dan array total
+            const months = Object.keys(payments);
+            const totals = Object.values(payments);
+
+            // konfigurasi chart
+            const horizontalBarChartEl = document.querySelector('#horizontalBarChart');
+            horizontalBarChartEl = {
+                type: 'bar',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Total Pembayaran SPP',
+                        data: totals,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            // inisialisasi chart
+            const paymentChart = new Chart(document.getElementById('paymentChart'), chartConfig);
+        </script> --}}
         <script>
             let cardColor, headingColor, axisColor, shadeColor, borderColor, labelColor;
 
@@ -73,6 +107,14 @@
             axisColor = config.colors.axisColor;
             borderColor = config.colors.borderColor;
             labelColor = config.colors.labelColor;
+
+            // ambil data payments dari controller
+            const payments = {!! json_encode($payments) !!};
+
+            // konversi data payments menjadi array bulan dan array total
+            const months = Object.keys(payments);
+            const totals = Object.values(payments);
+
             const horizontalBarChartEl = document.querySelector('#horizontalBarChart'),
                 horizontalBarChartConfig = {
                     chart: {
@@ -107,10 +149,10 @@
                         enabled: false
                     },
                     series: [{
-                        data: [700, 350, 480, 600, 210, 550, 150]
+                        data: totals
                     }],
                     xaxis: {
-                        categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23'],
+                        categories: months,
                         axisBorder: {
                             show: false
                         },

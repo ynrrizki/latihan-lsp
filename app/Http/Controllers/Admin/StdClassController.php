@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StdClassRequest;
+use App\Models\Major;
 use App\Models\StdClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +16,8 @@ class StdClassController extends Controller
      */
     public function index()
     {
-        $classes = StdClass::with('major')->get();
+        $classes = StdClass::with('major')->orderBy('name', 'DESC')->get();
+        $majors = Major::all();
 
         $headers = ['Nama', 'Jurusan'];
         $data = [];
@@ -27,7 +30,7 @@ class StdClassController extends Controller
             ];
         }
 
-        return view('pages.admin.class.index', compact('headers', 'data'));
+        return view('pages.admin.class.index', compact('headers', 'data', 'majors'));
     }
 
     /**
@@ -41,9 +44,13 @@ class StdClassController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StdClassRequest $request)
     {
-        //
+        $data = $request->only(['name', 'major_id']);
+
+        StdClass::create($data);
+
+        return redirect()->route('class.index');
     }
 
     /**
@@ -59,7 +66,7 @@ class StdClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return response()->json(StdClass::findOrFail($id));
     }
 
     /**
@@ -75,6 +82,8 @@ class StdClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = StdClass::findOrFail($id);
+        $data->delete();
+        return redirect()->route('class.index');
     }
 }

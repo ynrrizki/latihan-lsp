@@ -5,17 +5,37 @@
     @isset($type)
         @switch($type)
             @case('text')
-                <input type="text" class="form-control @error($name)
-is-invalid
-@enderror" id="{{ $name }}"
+                <input type="text" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
                     placeholder="{{ $placeholder }}" name="{{ $name }}" aria-label="{{ $placeholder }}"
                     value="{{ old($name, $value ?? '') }}">
             @break
 
+            @case('number')
+                <input type="number" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
+                    placeholder="{{ $placeholder }}" name="{{ $name }}" aria-label="{{ $placeholder }}"
+                    value="{{ old($name, $value ?? '') }}">
+            @break
+
+            @case('month')
+                <input type="month" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
+                    placeholder="{{ $placeholder ?? '' }}" name="{{ $name }}" aria-label="{{ $placeholder ?? '' }}"
+                    value="{{ old($name, $value ?? '') }}">
+            @break
+
+            @case('year')
+                <input type="number" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
+                    placeholder="{{ $placeholder ?? '' }}" name="{{ $name }}" aria-label="{{ $placeholder ?? '' }}"
+                    value="{{ old($name, $value ?? '') }}" min="1900" max="{{ date('Y') }}">
+            @break
+
+            @case('date')
+                <input type="date" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
+                    placeholder="{{ $placeholder ?? '' }}" name="{{ $name }}" aria-label="{{ $placeholder ?? '' }}"
+                    value="{{ old($name, $value ?? '') }}">
+            @break
+
             @case('password')
-                <input type="password" class="form-control @error($name)
-is-invalid
-@enderror" id="{{ $name }}"
+                <input type="password" class="form-control @error($name) is-invalid @enderror" id="{{ $name }}"
                     placeholder="{{ $placeholder }}" name="{{ $name }}" aria-label="{{ $placeholder }}"
                     value="{{ old($name, $value ?? '') }}">
             @break
@@ -29,9 +49,7 @@ is-invalid
             @break
 
             @case('textarea')
-                <textarea id="{{ $name }}" class="form-control @error($name)
-is-invalid
-@enderror"
+                <textarea id="{{ $name }}" class="form-control @error($name) is-invalid @enderror"
                     placeholder="{{ $placeholder }}" aria-label="{{ $placeholder }}" name="{{ $name }}"
                     value="{{ old($name, $value ?? '') }}"></textarea>
             @break
