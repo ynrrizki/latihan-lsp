@@ -10,20 +10,12 @@ use Illuminate\Http\Request;
 class SppController extends Controller
 {
 
-    protected $spp;
-
-    public function __construct(Spp $spp)
-    {
-        $this->spp = $spp;
-    }
-
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $spps = $this->spp->all();
+        $spps = Spp::all();
         $headers = ['ID', 'Tahun Ajaran', 'Nominal'];
         $data = [];
 
@@ -55,7 +47,7 @@ class SppController extends Controller
 
         // dd($data);
 
-        $this->spp->create($data);
+        Spp::create($data);
 
         return redirect()->route('spp.index');
     }
@@ -73,7 +65,7 @@ class SppController extends Controller
      */
     public function edit(string $id)
     {
-        return response()->json($this->spp->findOrFail($id));
+        return response()->json(Spp::findOrFail($id));
     }
 
     /**
@@ -82,7 +74,7 @@ class SppController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->only(['year', 'amount']);
-        $spp = $this->spp->findOrFail($id);
+        $spp = Spp::findOrFail($id);
         $spp->update($data);
         return redirect()->route('spp.index');
     }
@@ -92,7 +84,7 @@ class SppController extends Controller
      */
     public function destroy(string $id)
     {
-        $spp = $this->spp->findOrFail($id);
+        $spp = Spp::findOrFail($id);
         $spp->delete();
 
         return redirect()->route('spp.index');

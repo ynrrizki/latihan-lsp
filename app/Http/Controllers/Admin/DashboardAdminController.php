@@ -19,9 +19,8 @@ class DashboardAdminController extends Controller
             'class' => StdClass::all()->count(),
         ];
 
-        // ambil input tahun dan bulan dari request
-        $year = $request->input('year', date('Y'));
-        $month = $request->input('month', date('m'));
+        // ambil input tahun dari request
+        $year = $request->input('filterByYear') ?? date('Y');
 
         // generate array bulan dalam setahun
         $months = [

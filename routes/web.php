@@ -39,9 +39,7 @@ Route::get('/logout', [AuthController::class, 'destroy'])->name('auth.logout');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::group(['middleware' => 'isAdmin'], function () {
-        // Route::resource('user', UserController::class);
         Route::get('/admin', [DashboardAdminController::class, 'index'])->name('admin');
-        // Route::get('/admin/payment/{year}/{month}', [DashboardAdminController::class, 'index'])->name('admin');
         Route::resource('operator', OperatorController::class);
         Route::resource('student', StudentController::class);
         Route::resource('class', StdClassController::class);
@@ -49,7 +47,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 
     Route::group(['middleware' => 'isOperator'], function () {
-        // Route::get('/entry-payment/{id}', [PaymentController::class, 'edit'])->name('payment.store');
         Route::get('/history-payment', [PaymentController::class, 'index'])->name('payment.index');
         Route::post('/entry-payment', [PaymentController::class, 'store'])->name('payment.store');
         Route::get('/entry-payment/{id}', [PaymentController::class, 'edit'])->name('payment.edit');

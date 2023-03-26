@@ -1,6 +1,9 @@
 @extends('layouts.dash')
 
 @section('content')
+    @push('addon-css')
+        <link rel="stylesheet" href="{{ asset('themes/assets/vendor/libs/select2/select2.css') }}">
+    @endpush
     @include('partials.cards', [
         'admin' => $counts['admin'],
         'operator' => $counts['operator'],
@@ -10,7 +13,35 @@
         <div class="card">
             <div class="card-header header-elements p-3 my-n1">
                 <h5 class="card-title mb-0 pl-0 pl-sm-2 p-2">Statistik Pembayaran SPP</h5>
+
                 <div class="card-action-element ms-auto py-0">
+                    <form action="{{ route('admin') }}" method="GET" class="d-flex justify-content-end">
+                        @csrf
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-8">
+                                @field([
+                                    'name' => 'filterByYear',
+                                    'placeholder' => 'Tahun',
+                                    'type' => 'year',
+                                ])
+                            </div>
+                            <div class="col-md-1 text-lg-left text-sm-right">
+                                <button type="submit" class="btn btn-primary">
+                                    Cari
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    {{-- <div class="d-flex col-">
+                        <form action="{{ route('admin') }}" method="GET">
+                            @field([
+                                'name' => 'filterByYear',
+                                'placeholder' => 'Tahun Pembayaran',
+                                'type' => 'year',
+                            ])
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div> --}}
                     {{-- <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle p-0" data-bs-toggle="dropdown"
                             aria-expanded="false"><i class="bx bx-calendar"></i></button>
@@ -26,27 +57,14 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7
-                                    Days
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30
-                                    Days
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current
-                                    Month
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">
-                                    Last Month
-                                </a>
+                                <div class="dropdown-item">
+                                    @field([
+                                        'label' => 'Tahun',
+                                        'name' => 'filterByYear',
+                                        'type' => 'select',
+                                        'options' => '<option value="">Choose</option>',
+                                    ])
+                                </div>
                             </li>
                         </ul>
                     </div> --}}
