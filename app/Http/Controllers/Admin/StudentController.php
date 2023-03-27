@@ -22,6 +22,8 @@ class StudentController extends Controller
         $headers = ['name', 'email', 'username', 'class'];
         $data = [];
 
+        // dd(User::with(['student', 'student.stdClass', 'student.stdClass.major'])->where('role', 'STUDENT')->get());
+
         // dd($student);
         foreach ($users as $user) {
             $data[] = [
